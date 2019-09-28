@@ -22,6 +22,13 @@ namespace ProductCRUD.DAL
 
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ProductCategory>()
+            .HasKey(o => new { o.CategoryId, o.ProductId });
+            base.OnModelCreating(modelBuilder);
+        }
+
         public Task Delete<TEntity>(TEntity entity) where TEntity : class
         {
             return Task.Run(() =>

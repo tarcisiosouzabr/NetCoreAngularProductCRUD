@@ -1,0 +1,22 @@
+<body>
+  <div style="height: 100%;">
+      <mat-drawer-container class="example-container" style="height: 100%;" [hasBackdrop]="true">
+          <mat-drawer #drawer [mode]="push">
+            
+            <span style="margin:10px; font-size: 27px;">
+              <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="edit(element);">edit</mat-icon>
+              Produtos
+            </span>
+          </mat-drawer>
+          <mat-drawer-content>
+              <mat-button-toggle value="justify" (click)="drawer.toggle()" aria-label="Text align justify">
+                  <mat-icon>format_align_justify</mat-icon>
+              </mat-button-toggle>
+            <div class="container">
+              <router-outlet>
+              </router-outlet>            
+            </div>
+          </mat-drawer-content>
+        </mat-drawer-container>
+  </div>
+</body>

@@ -16,6 +16,8 @@ namespace ProductCRUD.Entities
 
         public string Description { get; set; }
 
+        public bool Active { get; set; }
+
         public DateTime CreatedDate { get; set; }
     }
 }
