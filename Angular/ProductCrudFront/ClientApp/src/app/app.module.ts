@@ -20,6 +20,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CategoryFormComponent } from './category/category-form/category-form.component';
 import { CategoryListComponent } from './category/category-list/category-list.component';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
 	declarations: [
@@ -52,7 +53,8 @@ import { CategoryListComponent } from './category/category-list/category-list.co
 		MatInputModule,
 		MatCardModule,
 		MatCheckboxModule,
-		MatSnackBarModule
+		MatSnackBarModule,
+		MatListModule
 	],
 	providers: [],
 	bootstrap: [ AppComponent ]
