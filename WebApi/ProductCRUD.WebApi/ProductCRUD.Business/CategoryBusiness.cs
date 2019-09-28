@@ -3,6 +3,7 @@ using ProductCRUD.Business.Infra;
 using ProductCRUD.DAL.Infra;
 using ProductCRUD.DAL.Infra.Repositories;
 using ProductCRUD.Entities;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -18,9 +19,13 @@ namespace ProductCRUD.Business
             _dbContext = dbContext;
         }
 
-        public Task AddAsync(Category category)
+        public async Task AddAsync(Category category)
         {
-            return _categoryRepository.AddAsync(category);
+            category.CreatedDate = DateTime.Now;
+            if (category.ParentId <= 0)
+                category.ParentId = null;
+            await _categoryRepository.AddAsync(category);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(Category category)
@@ -37,6 +42,9 @@ namespace ProductCRUD.Business
             var currentCategory = await _categoryRepository.GetAsync(category.Id);
             if (currentCategory == null)
                 throw new BusinessException("Categoria não encontrada.");
+            currentCategory.Name = category.Name;
+            if (category.ParentId > 0)
+                currentCategory.ParentId = category.ParentId;
             await _categoryRepository.EditAsync(currentCategory);
             await _dbContext.SaveChangesAsync();
         }

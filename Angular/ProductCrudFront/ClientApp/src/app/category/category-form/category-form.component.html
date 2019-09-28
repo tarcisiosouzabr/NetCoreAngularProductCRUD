@@ -1,0 +1,21 @@
+<div class="row d-flex justify-content-center">
+    <mat-card class="card-form row d-flex justify-content-center">
+        Adicionar Categoria
+        <div class="example-container">
+          <div class="row">
+            <div class="col-sm-12">
+              <mat-form-field class="w-100">
+                <input matInput placeholder="Nome" [(ngModel)]="model.name">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <button mat-raised-button color="primary" class="m-10" (click)="save();">Salvar</button>
+              <button mat-raised-button color="accent" [routerLink]="['/category']" class="m-10">Cancelar</button>
+            </div>
+          </div>
+        </div>
+    </mat-card>
+    </div>
+    

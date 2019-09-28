@@ -18,9 +18,17 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { CategoryFormComponent } from './category/category-form/category-form.component';
+import { CategoryListComponent } from './category/category-list/category-list.component';
 
 @NgModule({
-	declarations: [ AppComponent, ProductListComponent, ProductFormComponent ],
+	declarations: [
+		AppComponent,
+		ProductListComponent,
+		ProductFormComponent,
+		CategoryFormComponent,
+		CategoryListComponent
+	],
 	imports: [
 		BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
 		HttpClientModule,
@@ -29,7 +37,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 			{ path: '', component: ProductListComponent, pathMatch: 'full' },
 			{ path: 'product', component: ProductListComponent },
 			{ path: 'product/add', component: ProductFormComponent },
-			{ path: 'product/edit', component: ProductFormComponent }
+			{ path: 'product/edit', component: ProductFormComponent },
+			{ path: 'category', component: CategoryListComponent },
+			{ path: 'category/add', component: CategoryFormComponent },
+			{ path: 'category/edit', component: CategoryFormComponent }
 		]),
 		BrowserAnimationsModule,
 		MatSliderModule,
