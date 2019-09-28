@@ -1,14 +1,14 @@
 # NetCoreAngularProductCRUD
 
 Itens necessários
-- [ ] - Cadastro de produto
-- [ ] - Edição de produto
-- [ ] - Exclusão de produto
-- [ ] - Listagem de produto
-- [ ] - Cadastro de categoria
-- [ ] - Edição de categoria
-- [ ] - Exclusão de categoria
-- [ ] - Lista de categoria
+- [X] - Cadastro de produto
+- [X] - Edição de produto
+- [X] - Exclusão de produto
+- [X] - Listagem de produto
+- [X] - Cadastro de categoria
+- [X] - Edição de categoria
+- [X] - Exclusão de categoria
+- [X] - Lista de categoria
 - [ ] - Filtros de produtos
 - [ ] - Vinculo de produto e categoria
 - [ ] - Cadastro de imagem no produto
