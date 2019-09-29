@@ -10,5 +10,6 @@ Itens necessários
 - [X] - Exclusão de categoria
 - [X] - Lista de categoria
 - [ ] - Filtros de produtos
-- [ ] - Vinculo de produto e categoria
+- [X] - Vinculo de produto e categoria
 - [ ] - Cadastro de imagem no produto
+- [ ] - Cadastro de sub categoria
