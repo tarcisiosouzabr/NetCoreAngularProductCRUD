@@ -12,4 +12,4 @@ Itens necessários
 - [ ] - Filtros de produtos
 - [X] - Vinculo de produto e categoria
 - [ ] - Cadastro de imagem no produto
-- [ ] - Cadastro de sub categoria
+- [X] - Cadastro de sub categoria
