@@ -9,7 +9,7 @@ Itens necessários
 - [X] - Edição de categoria
 - [X] - Exclusão de categoria
 - [X] - Lista de categoria
-- [ ] - Filtros de produtos
+- [X] - Filtros de produtos
 - [X] - Vinculo de produto e categoria
 - [ ] - Cadastro de imagem no produto
 - [X] - Cadastro de sub categoria
