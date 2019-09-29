@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProductCRUD.Business.Infra;
 using ProductCRUD.Entities;
+using ProductCRUD.WebApi.Request;
 
 namespace ProductCRUD.WebApi.Controllers
 {
@@ -43,6 +44,20 @@ namespace ProductCRUD.WebApi.Controllers
         public async Task<IActionResult> DeleteAsync([FromBody]Product product)
         {
             await _productBusiness.DeleteAsync(product);
+            return Ok();
+        }
+
+        [Route("updatecategory"), HttpPost]
+        public async Task<IActionResult> UpdateCategoryAsync([FromBody]UpdateCategoryRequest updateCategoryRequest)
+        {
+            await _productBusiness.UpdateCategoryAsync(updateCategoryRequest.ProductId, updateCategoryRequest.Categories);
+            return Ok();
+        }
+
+        [Route("deletecategory"), HttpDelete]
+        public async Task<IActionResult> DeleteProductCategoryAsync([FromBody]ProductCategory productCategory)
+        {
+            await _productBusiness.RemoveProductCategoryAsync(productCategory);
             return Ok();
         }
     }

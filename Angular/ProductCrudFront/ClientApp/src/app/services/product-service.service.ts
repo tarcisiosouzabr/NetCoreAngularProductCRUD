@@ -41,4 +41,8 @@ export class ProductServiceService {
 		options.body = product;
 		return this.http.delete(environment.urlApi + 'product/delete', options);
 	}
+
+	public updateCategory(productCategory: any): any {
+		return this.http.post(environment.urlApi + 'product/updatecategory', productCategory);
+	}
 }

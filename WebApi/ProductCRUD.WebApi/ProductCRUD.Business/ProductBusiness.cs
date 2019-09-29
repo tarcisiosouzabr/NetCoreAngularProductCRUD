@@ -5,6 +5,7 @@ using ProductCRUD.DAL.Infra.Repositories;
 using ProductCRUD.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ProductCRUD.Business
@@ -55,9 +56,32 @@ namespace ProductCRUD.Business
             return _productRepository.GetAsync();
         }
 
-        public Task AddProductCategoryAsync(ProductCategory productCategory)
+        public async Task AddProductCategoryAsync(ProductCategory productCategory)
         {
-            return _productCategoryRepository.AddProductCategory(productCategory);
+            await _productCategoryRepository.AddProductCategory(productCategory);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task RemoveProductCategoryAsync(ProductCategory productCategory)
+        {
+            await _productCategoryRepository.DeleteAsync(productCategory);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task UpdateCategoryAsync(int productId, int[] categories)
+        {
+            var currentCategories = await _productCategoryRepository.GetProductCategories(productId);
+            var categoriesToDelete = currentCategories.Where(x => categories.Contains(x.CategoryId) == false).ToList();
+            foreach (var item in categoriesToDelete)
+            {
+                await _productCategoryRepository.DeleteAsync(item);
+            }
+            var categoriesToAdd = categories.Where(x => currentCategories.Select(y => y.CategoryId).ToArray().Contains(x) == false).ToList();
+            foreach (var item in categoriesToAdd)
+            {
+                await _productCategoryRepository.AddProductCategory(new ProductCategory { CategoryId = item, ProductId = productId });
+            }
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

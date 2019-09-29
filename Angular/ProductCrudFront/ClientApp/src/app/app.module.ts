@@ -21,6 +21,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CategoryFormComponent } from './category/category-form/category-form.component';
 import { CategoryListComponent } from './category/category-list/category-list.component';
 import { MatListModule } from '@angular/material/list';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
 	declarations: [
@@ -54,7 +55,8 @@ import { MatListModule } from '@angular/material/list';
 		MatCardModule,
 		MatCheckboxModule,
 		MatSnackBarModule,
-		MatListModule
+		MatListModule,
+		MatSelectModule
 	],
 	providers: [],
 	bootstrap: [ AppComponent ]

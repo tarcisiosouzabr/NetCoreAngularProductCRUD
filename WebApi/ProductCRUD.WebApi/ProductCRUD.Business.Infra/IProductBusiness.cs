@@ -10,5 +10,8 @@ namespace ProductCRUD.Business.Infra
         Task EditAsync(Product product);
         Task DeleteAsync(Product product);
         Task<List<Product>> GetAsync();
+        Task AddProductCategoryAsync(ProductCategory productCategory);
+        Task RemoveProductCategoryAsync(ProductCategory productCategory);
+        Task UpdateCategoryAsync(int productId, int[] categories);
     }
 }
