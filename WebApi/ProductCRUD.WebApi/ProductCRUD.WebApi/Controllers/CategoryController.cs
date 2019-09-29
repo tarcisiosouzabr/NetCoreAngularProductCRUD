@@ -20,7 +20,7 @@ namespace ProductCRUD.WebApi.Controllers
         }
 
         [Route("get"), HttpGet]
-        public async Task<IActionResult> GetAsync([FromQuery]string name)
+        public async Task<IActionResult> GetAsync()
         {
             return Ok(await _categoryBusiness.GetAsync());
         }
@@ -44,6 +44,18 @@ namespace ProductCRUD.WebApi.Controllers
         {
             await _categoryBusiness.DeleteAsync(category);
             return Ok();
+        }
+
+        [Route("getProduct"), HttpGet]
+        public async Task<IActionResult> GetAsync([FromQuery]int productId)
+        {
+            return Ok(await _categoryBusiness.GetAsync(productId));
+        }
+
+        [Route("getParentCategories"), HttpGet]
+        public async Task<IActionResult> GetParentCategoriesAsync()
+        {
+            return Ok(await _categoryBusiness.GetParentCategoriesAsync());
         }
     }
 }

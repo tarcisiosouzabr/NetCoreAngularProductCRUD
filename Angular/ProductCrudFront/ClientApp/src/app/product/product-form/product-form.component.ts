@@ -37,7 +37,10 @@ export class ProductFormComponent implements OnInit {
 			}
 		});
 		this.getCategories();
-		this.productCategories.push({});
+		this.loadProductCategory();
+		if (this.productCategories.length <= 0) {
+			this.productCategories.push({});
+		}
 	}
 
 	getCategories() {
@@ -58,20 +61,29 @@ export class ProductFormComponent implements OnInit {
 	}
 
 	removeCategory(index: any, category: any) {
-		this.productService.deleteCategory({ categoryId: category.categoryId, productId: this.model.id }).subscribe(
-			(res) => {
-				this.productCategories.splice(index, 1);
-			},
-			(error) => {
-				this._snackBar.open('Erro ao remover categoria!', 'Ok', {
-					duration: 3000
-				});
-			}
-		);
+		this.productCategories.splice(index, 1);
 	}
 
 	changeCategory(category: any) {
 		console.log(this.productCategories);
+	}
+
+	loadProductCategory() {
+		if (this.model.id > 0) {
+			this.categoryService.getProductCategories(this.model.id).subscribe(
+				(res) => {
+					this.productCategories = res.map(function(x) {
+						return { categoryId: x.id };
+					});
+					console.log(this.productCategories);
+				},
+				(error) => {
+					this._snackBar.open('Erro ao carregar categorias.', 'Ok', {
+						duration: 3000
+					});
+				}
+			);
+		}
 	}
 
 	save() {
@@ -79,8 +91,21 @@ export class ProductFormComponent implements OnInit {
 			this.productService.patch(this.model).subscribe(
 				(res) => {
 					this._snackBar.open('Produto editado com sucesso!', 'Ok', {
-						duration: 2000
+						duration: 3000
 					});
+					this.productService
+						.updateCategory({
+							productId: this.model.id,
+							categories: this.productCategories.map((x) => x.categoryId)
+						})
+						.subscribe(
+							(res) => {},
+							(error) => {
+								this._snackBar.open('Erro ao atualizar categorias!', 'Ok', {
+									duration: 3000
+								});
+							}
+						);
 					this.router.navigate([ '/product' ]);
 				},
 				(error) => {
@@ -95,6 +120,19 @@ export class ProductFormComponent implements OnInit {
 					this._snackBar.open('Produto cadastrado com sucesso!', 'Ok', {
 						duration: 2000
 					});
+					this.productService
+						.updateCategory({
+							productId: res.id,
+							categories: this.productCategories.map((x) => x.categoryId)
+						})
+						.subscribe(
+							(res) => {},
+							(error) => {
+								this._snackBar.open('Erro ao atualizar categorias!', 'Ok', {
+									duration: 3000
+								});
+							}
+						);
 					this.router.navigate([ '/product' ]);
 				},
 				(error) => {

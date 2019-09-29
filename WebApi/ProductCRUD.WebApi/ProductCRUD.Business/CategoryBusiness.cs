@@ -53,5 +53,15 @@ namespace ProductCRUD.Business
         {
             return _categoryRepository.GetAsync();
         }
+
+        public Task<List<Category>> GetAsync(int productId)
+        {
+            return _categoryRepository.GetProductCategoriesAsync(productId);
+        }
+
+        public Task<List<Category>> GetParentCategoriesAsync()
+        {
+            return _categoryRepository.GetParentCategoriesAsync();
+        }
     }
 }

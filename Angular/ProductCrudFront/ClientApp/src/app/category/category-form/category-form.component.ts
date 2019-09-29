@@ -11,6 +11,7 @@ import { Category } from 'src/app/model/category';
 })
 export class CategoryFormComponent implements OnInit {
 	model: Category;
+	parentCategories: Array<any>;
 	constructor(
 		private categoryService: CategoryService,
 		private _snackBar: MatSnackBar,
@@ -28,6 +29,28 @@ export class CategoryFormComponent implements OnInit {
 				this.model.parentId = Number(params.get('parentId'));
 			}
 		});
+		this.getParentCategories();
+	}
+
+	getParentCategories() {
+		this.categoryService.getParentCategories().subscribe(
+			(res) => {
+				this.parentCategories = res;
+				if (this.model.id > 0) {
+					let categoryId = this.model.id;
+					debugger;
+					this.parentCategories = this.parentCategories.filter(function(value) {
+						return value.id != categoryId;
+					});
+					console.log(this.parentCategories);
+				}
+			},
+			(error) => {
+				this._snackBar.open('Erro ao carregar categorias!', 'Ok', {
+					duration: 3000
+				});
+			}
+		);
 	}
 
 	save() {

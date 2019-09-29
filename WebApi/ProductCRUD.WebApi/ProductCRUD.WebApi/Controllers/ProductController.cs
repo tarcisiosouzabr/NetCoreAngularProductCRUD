@@ -37,7 +37,7 @@ namespace ProductCRUD.WebApi.Controllers
         public async Task<IActionResult> CreateAsync([FromBody]Product product)
         {
             await _productBusiness.AddAsync(product);
-            return Ok();
+            return Ok(product);
         }
 
         [Route("delete"), HttpDelete]

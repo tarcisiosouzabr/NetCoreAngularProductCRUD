@@ -38,14 +38,14 @@
                 </mat-form-field>
           </div>
           <div class="col-sm-4">
-              <button mat-raised-button color="primary" class="m-10" *ngIf="i == 0" (click)="addCategory();">Adicionar Categoria</button>
-              <button mat-raised-button color="accent" class="m-10" *ngIf="i > 0" (click)="removeCategory(i, item);">Remover Categoria</button>
+              <button mat-raised-button color="accent" class="m-10" (click)="removeCategory(i, item);">Remover Categoria</button>
           </div>        
       </div>
       <div class="row">
         <div class="col-sm-12">
           <button mat-raised-button color="primary" class="m-10" (click)="save();">Salvar</button>
           <button mat-raised-button color="accent" [routerLink]="['/product']" class="m-10">Cancelar</button>
+          <button mat-stroked-button color="accent" class="m-10" (click)="addCategory();">Adicionar Categoria</button>
         </div>
       </div>
     </div>

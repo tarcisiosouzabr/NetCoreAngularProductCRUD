@@ -40,5 +40,15 @@ namespace ProductCRUD.DAL.Repositories
         {
             return _dbContext.CategoryQuery.ToListAsync();
         }
+
+        public Task<List<Category>> GetParentCategoriesAsync()
+        {
+            return _dbContext.CategoryQuery.Where(x => x.ParentId == null).ToListAsync();
+        }
+
+        public Task<List<Category>> GetProductCategoriesAsync(int productId)
+        {
+            return _dbContext.ProductCategoryQuery.Where(x => x.ProductId == productId).Include(x => x.Category).Select(x => x.Category).ToListAsync();
+        }
     }
 }

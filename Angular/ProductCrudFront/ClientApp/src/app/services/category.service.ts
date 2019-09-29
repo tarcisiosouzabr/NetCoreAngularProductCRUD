@@ -41,4 +41,14 @@ export class CategoryService {
 		options.body = category;
 		return this.http.delete(environment.urlApi + 'category/delete', options);
 	}
+
+	public getProductCategories(productId: any): any {
+		return this.http
+			.get(environment.urlApi + 'category/getProduct?productId=' + productId)
+			.pipe(map(this.extractData));
+	}
+
+	public getParentCategories(): any {
+		return this.http.get(environment.urlApi + 'category/getParentCategories').pipe(map(this.extractData));
+	}
 }

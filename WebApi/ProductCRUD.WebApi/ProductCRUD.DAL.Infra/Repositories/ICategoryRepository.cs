@@ -11,5 +11,7 @@ namespace ProductCRUD.DAL.Infra.Repositories
         Task DeleteAsync(Category category);
         Task<Category> GetAsync(int id);
         Task<List<Category>> GetAsync();
+        Task<List<Category>> GetProductCategoriesAsync(int productId);
+        Task<List<Category>> GetParentCategoriesAsync();
     }
 }
