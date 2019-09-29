@@ -1,7 +1,29 @@
 <div class="container">
     <div style="display: inline; margin: 10px;">
-      Produtos
-      <button mat-raised-button color="primary" [routerLink]="[ '/product/add']" style="float: right; margin-bottom: 10px;">Adicionar Produtos</button>
+      <h3>Produtos</h3>
+      <div class="row">
+        <div class="col-sm-4">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Nome ou Descrição" [(ngModel)]="filter.nameDescription">
+            </mat-form-field>
+        </div>
+        <div class="col-sm-4">
+            <mat-form-field class="w-100">
+                <mat-label>Categoria</mat-label>
+                <mat-select [(ngModel)]="filter.categoryId">
+                  <mat-option *ngFor="let cat of categories" [value]="cat.id">
+                    {{cat.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+        <div class="col-sm-2">
+            <button mat-raised-button color="accent" (click)="getProduct();" style="float: right; margin-bottom: 10px;">Pesquisar</button>
+        </div>
+        <div class="col-sm-2">
+          <button mat-raised-button color="primary" [routerLink]="[ '/product/add']" style="float: right; margin-bottom: 10px;">Adicionar Produtos</button>
+        </div>
+      </div>
     </div>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;">
         <ng-container matColumnDef="position">

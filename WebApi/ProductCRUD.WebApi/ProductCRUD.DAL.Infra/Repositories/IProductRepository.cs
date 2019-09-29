@@ -10,6 +10,6 @@ namespace ProductCRUD.DAL.Infra.Repositories
         Task EditAsync(Product product);
         Task DeleteAsync(Product product);
         Task<Product> GetAsync(int id);
-        Task<List<Product>> GetAsync();
+        Task<List<Product>> GetAsync(string nameDescription, int categoryId);
     }
 }

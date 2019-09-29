@@ -25,8 +25,8 @@ export class ProductServiceService {
 		return body || {};
 	}
 
-	public get(): Observable<any> {
-		return this.http.get(environment.urlApi + 'product/get').pipe(map(this.extractData));
+	public get(filter: any): Observable<any> {
+		return this.http.get(environment.urlApi + 'product/get', { params: filter }).pipe(map(this.extractData));
 	}
 
 	public post(product: any): any {

@@ -15,5 +15,8 @@ namespace ProductCRUD.Entities
 
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
+
+        [ForeignKey("ProductId")]
+        public virtual Product Product { get; set; }
     }
 }

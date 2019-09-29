@@ -21,9 +21,9 @@ namespace ProductCRUD.WebApi.Controllers
         }
 
         [Route("get"), HttpGet]
-        public async Task<IActionResult> GetAsync([FromQuery]string name)
+        public async Task<IActionResult> GetAsync([FromQuery]string nameDescription, [FromQuery]int categoryId = 0)
         {
-            return Ok(await _productBusiness.GetAsync());
+            return Ok(await _productBusiness.GetAsync(nameDescription, categoryId));
         }
 
         [Route("edit"), HttpPatch]

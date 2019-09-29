@@ -34,9 +34,14 @@ namespace ProductCRUD.DAL.Repositories
             return _dbContext.ProductQuery.Where(x => x.Id == id).FirstOrDefaultAsync();
         }
 
-        public Task<List<Product>> GetAsync()
+        public Task<List<Product>> GetAsync(string nameDescription, int categoryId = 0)
         {
-            return _dbContext.ProductQuery.ToListAsync();
+            return _dbContext.ProductCategoryQuery.Include(x => x.Product)
+                .Where(x =>
+                 (categoryId == 0 || x.CategoryId == categoryId) && 
+                 (string.IsNullOrEmpty(nameDescription) || 
+                 (x.Product.Name.Contains(nameDescription) || x.Product.Description.Contains(nameDescription))))
+                .Select(x => x.Product).Distinct().ToListAsync();
         }
     }
 }

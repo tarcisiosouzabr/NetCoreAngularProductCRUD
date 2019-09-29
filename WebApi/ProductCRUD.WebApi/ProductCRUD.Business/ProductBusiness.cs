@@ -51,9 +51,9 @@ namespace ProductCRUD.Business
             await _dbContext.SaveChangesAsync();
         }
 
-        public Task<List<Product>> GetAsync()
+        public Task<List<Product>> GetAsync(string nameDescription, int categoryId = 0)
         {
-            return _productRepository.GetAsync();
+            return _productRepository.GetAsync(nameDescription, categoryId);
         }
 
         public async Task AddProductCategoryAsync(ProductCategory productCategory)
