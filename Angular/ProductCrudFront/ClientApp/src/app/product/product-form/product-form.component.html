@@ -11,7 +11,7 @@
                   <button mat-icon-button color="warn" (click)="deleteImage(img);" class="relativebtn">
                     <mat-icon>delete</mat-icon>
                   </button>
-                  <img src="https://easysoccer.blob.core.windows.net/product/{{img.id}}.png" class="img"/>
+                  <img src="{{env.azureBlobBaseUrl}}{{img.id}}.png" class="img"/>
                 </div>
               </mat-carousel-slide>
             </mat-carousel>

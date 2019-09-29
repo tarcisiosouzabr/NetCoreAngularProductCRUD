@@ -1,4 +1,5 @@
-﻿using Microsoft.WindowsAzure.Storage;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System;
@@ -11,12 +12,18 @@ namespace ProductCRUD.WebApi.Services
 {
     public class AzureStorageService : IAzureStorageService
     {
+        private string _accountname;
+        private string _accesskey;
+
+        public AzureStorageService(IConfiguration configuration)
+        {
+            _accountname = configuration["AzureStorage:AccountName"];
+            _accesskey = configuration["AzureStorage:AccessKey"];
+        }
 
         public async Task<Guid> UploadFile(string base64Image)
         {
-            string accountname = "easysoccer";
-            string accesskey = "Dimz4dus4oGSiqHViFjrRqp5MUcB4XEJYpQ/xwFqKA22U35IlTdWgnV0mHKDpbZEsLdG6u+VA3hVSUUSvq4PwA==";
-            StorageCredentials creden = new StorageCredentials(accountname, accesskey);
+            StorageCredentials creden = new StorageCredentials(_accountname, _accesskey);
 
             CloudStorageAccount acc = new CloudStorageAccount(creden, useHttps: true);
 

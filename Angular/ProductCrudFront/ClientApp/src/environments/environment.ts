@@ -4,7 +4,8 @@
 
 export const environment = {
 	production: false,
-	urlApi: 'http://localhost:62284/api/'
+	urlApi: 'http://localhost:62284/api/',
+	azureBlobBaseUrl: 'https://easysoccer.blob.core.windows.net/product/'
 };
 
 /*

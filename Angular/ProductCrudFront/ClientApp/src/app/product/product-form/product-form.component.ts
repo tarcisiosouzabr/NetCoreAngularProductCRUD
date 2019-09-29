@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from 'src/app/services/category.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
 	selector: 'app-product-form',
@@ -17,6 +18,7 @@ export class ProductFormComponent implements OnInit {
 	productCategories: Array<any>;
 	srcResult;
 	images;
+	env;
 	constructor(
 		private productService: ProductServiceService,
 		private _snackBar: MatSnackBar,
@@ -26,6 +28,7 @@ export class ProductFormComponent implements OnInit {
 	) {
 		this.model = new Product();
 		this.productCategories = new Array<any>();
+		this.env = environment;
 	}
 
 	ngOnInit() {

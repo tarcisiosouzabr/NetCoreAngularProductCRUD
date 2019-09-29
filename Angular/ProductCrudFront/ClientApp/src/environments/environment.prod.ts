@@ -1,4 +1,5 @@
 export const environment = {
 	production: true,
-	urlApi: ''
+	urlApi: '',
+	azureBlobBaseUrl: 'https://easysoccer.blob.core.windows.net/product/'
 };
