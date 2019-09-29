@@ -45,4 +45,19 @@ export class ProductServiceService {
 	public updateCategory(productCategory: any): any {
 		return this.http.post(environment.urlApi + 'product/updatecategory', productCategory);
 	}
+
+	public uploadImage(productImage: any): any {
+		return this.http.post(environment.urlApi + 'product/uploadfile', productImage);
+	}
+
+	public getProductImages(product: any): any {
+		return this.http
+			.get(environment.urlApi + 'product/getimages', { params: { productId: product.id } })
+			.pipe(map(this.extractData));
+	}
+
+	public deleteImage(product: any): any {
+		options.body = product;
+		return this.http.delete(environment.urlApi + 'product/deleteimage', options);
+	}
 }

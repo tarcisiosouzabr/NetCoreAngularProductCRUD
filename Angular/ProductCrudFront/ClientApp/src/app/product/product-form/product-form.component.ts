@@ -15,6 +15,8 @@ export class ProductFormComponent implements OnInit {
 	model: Product;
 	categories: any;
 	productCategories: Array<any>;
+	srcResult;
+	images;
 	constructor(
 		private productService: ProductServiceService,
 		private _snackBar: MatSnackBar,
@@ -38,6 +40,7 @@ export class ProductFormComponent implements OnInit {
 		});
 		this.getCategories();
 		this.loadProductCategory();
+		this.getProductImages();
 		if (this.productCategories.length <= 0) {
 			this.productCategories.push({});
 		}
@@ -64,10 +67,6 @@ export class ProductFormComponent implements OnInit {
 		this.productCategories.splice(index, 1);
 	}
 
-	changeCategory(category: any) {
-		console.log(this.productCategories);
-	}
-
 	loadProductCategory() {
 		if (this.model.id > 0) {
 			this.categoryService.getProductCategories(this.model.id).subscribe(
@@ -84,6 +83,20 @@ export class ProductFormComponent implements OnInit {
 				}
 			);
 		}
+	}
+
+	getProductImages() {
+		this.images = [];
+		this.productService.getProductImages(this.model).subscribe(
+			(res) => {
+				this.images = res;
+			},
+			(error) => {
+				this._snackBar.open('Erro ao consultar imagens!', 'Ok', {
+					duration: 2000
+				});
+			}
+		);
 	}
 
 	save() {
@@ -142,5 +155,56 @@ export class ProductFormComponent implements OnInit {
 				}
 			);
 		}
+	}
+
+	onFileSelected() {
+		const inputNode: any = document.querySelector('#file');
+
+		if (typeof FileReader !== 'undefined') {
+			const reader = new FileReader();
+
+			reader.onload = (e: any) => {
+				this.srcResult = e.target.result;
+			};
+			reader.onloadend = (e) => {
+				if (this.model.id > 0) {
+					this.productService
+						.uploadImage({
+							productId: this.model.id,
+							imageBase64: reader.result
+						})
+						.subscribe(
+							(res) => {
+								this.getProductImages();
+								this._snackBar.open('Imagem enviada com sucesso!', 'Ok', {
+									duration: 3000
+								});
+							},
+							(error) => {
+								this._snackBar.open('Erro ao enviar imagem!', 'Ok', {
+									duration: 3000
+								});
+							}
+						);
+				}
+			};
+			console.log(reader.readAsDataURL(inputNode.files[0]));
+		}
+	}
+
+	deleteImage(img: any) {
+		this.productService.deleteImage({ Id: img.id, ProductId: this.model.id }).subscribe(
+			(res) => {
+				this.getProductImages();
+				this._snackBar.open('Imagem excluída com sucesso!', 'Ok', {
+					duration: 3000
+				});
+			},
+			(error) => {
+				this._snackBar.open('Erro ao excluir imagem!', 'Ok', {
+					duration: 3000
+				});
+			}
+		);
 	}
 }

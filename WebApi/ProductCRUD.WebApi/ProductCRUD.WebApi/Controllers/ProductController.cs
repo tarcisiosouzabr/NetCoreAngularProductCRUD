@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProductCRUD.Business.Infra;
 using ProductCRUD.Entities;
 using ProductCRUD.WebApi.Request;
+using ProductCRUD.WebApi.Services;
 
 namespace ProductCRUD.WebApi.Controllers
 {
@@ -15,9 +16,11 @@ namespace ProductCRUD.WebApi.Controllers
     public class ProductController : ControllerBase
     {
         private IProductBusiness _productBusiness;
-        public ProductController(IProductBusiness productBusiness)
+        private IAzureStorageService _azureStorageService;
+        public ProductController(IProductBusiness productBusiness, IAzureStorageService azureStorageService)
         {
             _productBusiness = productBusiness;
+            _azureStorageService = azureStorageService;
         }
 
         [Route("get"), HttpGet]
@@ -54,10 +57,31 @@ namespace ProductCRUD.WebApi.Controllers
             return Ok();
         }
 
-        [Route("deletecategory"), HttpDelete]
-        public async Task<IActionResult> DeleteProductCategoryAsync([FromBody]ProductCategory productCategory)
+        [Route("uploadfile"), HttpPost]
+        public async Task<IActionResult> UploadFileAsync([FromBody]ProductImageRequest productImageRequest)
         {
-            await _productBusiness.RemoveProductCategoryAsync(productCategory);
+            try
+            {
+                var fileName = await _azureStorageService.UploadFile(productImageRequest.ImageBase64);
+                await _productBusiness.AddProductFileAsync(fileName, productImageRequest.ProductId);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.ToString());
+            }
+        }
+
+        [Route("getimages"), HttpGet]
+        public async Task<IActionResult> GetProductImagesAsync([FromQuery]int productId)
+        {
+            return Ok(await _productBusiness.GetProductImagesAsync(productId));
+        }
+
+        [Route("deleteimage"), HttpDelete]
+        public async Task<IActionResult> DeleteProductImageAsync([FromBody]ProductImage productImage)
+        {
+            await _productBusiness.DeleteProductImageAsync(productImage);
             return Ok();
         }
     }

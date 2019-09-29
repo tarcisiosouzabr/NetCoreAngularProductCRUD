@@ -14,5 +14,6 @@ namespace ProductCRUD.DAL.Infra
         IQueryable<Product> ProductQuery { get; }
         IQueryable<Category> CategoryQuery { get; }
         IQueryable<ProductCategory> ProductCategoryQuery { get; }
+        IQueryable<ProductImage> ProductImageQuery { get; }
     }
 }

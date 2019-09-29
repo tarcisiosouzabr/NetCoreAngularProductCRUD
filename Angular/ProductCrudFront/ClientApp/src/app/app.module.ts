@@ -22,6 +22,7 @@ import { CategoryFormComponent } from './category/category-form/category-form.co
 import { CategoryListComponent } from './category/category-list/category-list.component';
 import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
+import { MatCarouselModule } from '@ngmodule/material-carousel';
 
 @NgModule({
 	declarations: [
@@ -56,7 +57,8 @@ import { MatSelectModule } from '@angular/material/select';
 		MatCheckboxModule,
 		MatSnackBarModule,
 		MatListModule,
-		MatSelectModule
+		MatSelectModule,
+		MatCarouselModule
 	],
 	providers: [],
 	bootstrap: [ AppComponent ]

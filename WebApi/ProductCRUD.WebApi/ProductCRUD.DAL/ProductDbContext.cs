@@ -17,6 +17,9 @@ namespace ProductCRUD.DAL
         private DbSet<ProductCategory> ProductCategory { get; set; }
         public IQueryable<ProductCategory> ProductCategoryQuery { get { return ProductCategory; } }
 
+        private DbSet<ProductImage> ProductImage { get; set; }
+        public IQueryable<ProductImage> ProductImageQuery { get { return ProductImage; } }
+
         public ProductDbContext(DbContextOptions op) : base(op)
         {
 

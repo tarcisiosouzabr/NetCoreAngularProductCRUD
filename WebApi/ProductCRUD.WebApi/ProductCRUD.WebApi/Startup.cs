@@ -16,6 +16,7 @@ using ProductCRUD.DAL;
 using ProductCRUD.DAL.Infra;
 using ProductCRUD.DAL.Infra.Repositories;
 using ProductCRUD.DAL.Repositories;
+using ProductCRUD.WebApi.Services;
 
 namespace ProductCRUD.WebApi
 {
@@ -47,6 +48,10 @@ namespace ProductCRUD.WebApi
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
+            services.AddScoped<IProductImageRepository, ProductImageRepository>();
+
+            services.AddScoped<IAzureStorageService, AzureStorageService>();
+
 
         }
 

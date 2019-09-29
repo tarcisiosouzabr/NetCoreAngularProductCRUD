@@ -15,11 +15,13 @@ namespace ProductCRUD.Business
         private IProductRepository _productRepository;
         private IProductDbContext _dbContext;
         private IProductCategoryRepository _productCategoryRepository;
-        public ProductBusiness(IProductRepository productRepository, IProductDbContext dbContext, IProductCategoryRepository productCategoryRepository)
+        private IProductImageRepository _productImageRepository;
+        public ProductBusiness(IProductRepository productRepository, IProductDbContext dbContext, IProductCategoryRepository productCategoryRepository, IProductImageRepository productImageRepository)
         {
             _productRepository = productRepository;
             _dbContext = dbContext;
             _productCategoryRepository = productCategoryRepository;
+            _productImageRepository = productImageRepository;
         }
 
         public async Task AddAsync(Product product)
@@ -81,6 +83,23 @@ namespace ProductCRUD.Business
             {
                 await _productCategoryRepository.AddProductCategory(new ProductCategory { CategoryId = item, ProductId = productId });
             }
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task AddProductFileAsync(Guid fileName, int productId)
+        {
+            await _productImageRepository.AddAsync(new ProductImage { Id = fileName, ProductId = productId });
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public Task<List<ProductImage>> GetProductImagesAsync(int productId)
+        {
+            return _productImageRepository.GetAsync(productId);
+        }
+
+        public async Task DeleteProductImageAsync(ProductImage productImage)
+        {
+            await _productImageRepository.DeleteAsync(productImage);
             await _dbContext.SaveChangesAsync();
         }
     }

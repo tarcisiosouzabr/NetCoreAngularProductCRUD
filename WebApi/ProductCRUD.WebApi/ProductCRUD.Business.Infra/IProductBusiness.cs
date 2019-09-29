@@ -1,4 +1,5 @@
 ﻿using ProductCRUD.Entities;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -13,5 +14,8 @@ namespace ProductCRUD.Business.Infra
         Task AddProductCategoryAsync(ProductCategory productCategory);
         Task RemoveProductCategoryAsync(ProductCategory productCategory);
         Task UpdateCategoryAsync(int productId, int[] categories);
+        Task AddProductFileAsync(Guid fileName, int productId);
+        Task<List<ProductImage>> GetProductImagesAsync(int productId);
+        Task DeleteProductImageAsync(ProductImage productImage);
     }
 }
