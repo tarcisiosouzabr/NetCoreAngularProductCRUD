@@ -1,0 +1,39 @@
+.example-container {
+	width: 100%;
+}
+.form {
+	width: 100%;
+}
+.card-form {
+	width: 60%;
+}
+.w-100 {
+	width: 100%;
+}
+
+.m-10 {
+	margin: 10px;
+	margin-left: 0px;
+}
+
+.img {
+	width: 100%;
+	height: 100%;
+}
+
+.h-100 {
+	height: 100%;
+}
+
+.h200px {
+	height: 180px;
+}
+
+.carousel-slide[_ngcontent-ng-cli-universal-c8] {
+	height: 180px !important;
+}
+.relativebtn {
+	position: absolute;
+	top: 0;
+	right: 0;
+}

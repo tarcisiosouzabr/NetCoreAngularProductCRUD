@@ -1,0 +1,17 @@
+.example-container {
+	width: 100%;
+}
+.form {
+	width: 100%;
+}
+.card-form {
+	width: 60%;
+}
+.w-100 {
+	width: 100%;
+}
+
+.m-10 {
+	margin: 10px;
+	margin-left: 0px;
+}

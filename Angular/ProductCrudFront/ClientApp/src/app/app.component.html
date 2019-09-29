@@ -1,0 +1,27 @@
+<body>
+  <div style="height: 100%;">
+      <mat-drawer-container class="example-container" style="height: 100%;" [hasBackdrop]="true">
+          <mat-drawer #drawer [mode]="push">            
+              <mat-list>
+                  <mat-list-item [routerLink]="[ '/product' ]" (click)="drawer.toggle()">
+                    <mat-icon matListIcon>store</mat-icon>
+                    <h3 matLine> <a class="menuLink"> Produto</a></h3>
+                </mat-list-item>
+                  <mat-list-item [routerLink]="[ '/category' ]" (click)="drawer.toggle()">
+                      <mat-icon matListIcon>category</mat-icon>
+                      <h3 matLine> <a class="menuLink"> Categoria</a></h3>
+                  </mat-list-item>
+                </mat-list>
+          </mat-drawer>
+          <mat-drawer-content>
+              <mat-button-toggle value="justify" (click)="drawer.toggle()" aria-label="Text align justify">
+                  <mat-icon>format_align_justify</mat-icon>
+              </mat-button-toggle>
+            <div class="container">
+              <router-outlet>
+              </router-outlet>            
+            </div>
+          </mat-drawer-content>
+        </mat-drawer-container>
+  </div>
+</body>
